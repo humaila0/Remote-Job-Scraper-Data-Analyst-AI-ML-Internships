@@ -1,4 +1,8 @@
 Remote Job Scraper – Data Analyst / AI / ML Internships
+
+
+
+
 This project automates the process of collecting remote job listings related to Data Analyst, Data Science, AI, Machine Learning, and Internships using Make.com and Google Sheets.
 
 🚀 What It Does
