@@ -1,0 +1,148 @@
+{
+  "name": "Integration RSS, Google Sheets",
+  "flow": [
+    {
+      "id": 1,
+      "module": "rss:TriggerNewArticle",
+      "version": 4,
+      "parameters": {
+        "url": "https://weworkremotely.com/categories/remote-programming-jobs.rss",
+        "maxResults": 1,
+        "username": "",
+        "password": "",
+        "include": [],
+        "gzip": true
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0 },
+        "restore": {},
+        "parameters": [
+          { "name": "url", "type": "url", "label": "URL", "required": true },
+          { "name": "maxResults", "type": "number", "label": "Maximum number of returned items", "required": true },
+          { "name": "username", "type": "text", "label": "User name" },
+          { "name": "password", "type": "text", "label": "Password" },
+          { "name": "include", "type": "select", "label": "Process RSS fields", "multiple": true, "validate": { "enum": ["google-merchant-center", "itunes"] }},
+          { "name": "gzip", "type": "boolean", "label": "Request compressed content", "required": true }
+        ],
+        "interface": [
+          { "name": "title", "type": "text", "label": "Title" },
+          { "name": "description", "type": "text", "label": "Description" },
+          { "name": "summary", "type": "text", "label": "Summary" },
+          { "name": "author", "type": "text", "label": "Author" },
+          { "name": "url", "type": "url", "label": "URL" },
+          { "name": "dateUpdated", "type": "date", "label": "Date updated" },
+          { "name": "dateCreated", "type": "date", "label": "Date created" },
+          { "name": "comments", "type": "url", "label": "Comments" },
+          { "name": "image", "type": "collection", "label": "Image", "spec": [
+              { "name": "title", "label": "Name", "type": "text" },
+              { "name": "url", "label": "URL", "type": "url" }
+          ]},
+          { "name": "categories", "type": "array", "label": "Categories", "spec": { "type": "text" }},
+          { "name": "source", "type": "collection", "label": "Source", "spec": [
+              { "name": "title", "label": "Name", "type": "text" },
+              { "name": "url", "label": "URL", "type": "url" }
+          ]},
+          { "name": "enclosures", "type": "array", "label": "Enclosures", "spec": [
+              { "name": "url", "label": "URL", "type": "url" },
+              { "name": "type", "label": "Type", "type": "text" },
+              { "name": "length", "label": "Length", "type": "number" }
+          ]},
+          { "name": "rssFields", "label": "RSS fields", "help": "Other RSS fields. All values are in text format.", "type": "collection", "spec": [
+              { "name": "title", "label": "title", "type": "text" },
+              { "name": "region", "label": "region", "type": "text" },
+              { "name": "category", "label": "category", "type": "text" },
+              { "name": "description", "label": "description", "type": "text" },
+              { "name": "pubdate", "label": "pubdate", "type": "text" },
+              { "name": "guid", "label": "guid", "type": "text" },
+              { "name": "link", "label": "link", "type": "text" },
+              { "label": "media:content", "name": "media:content", "type": "collection", "spec": [
+                  { "name": "props", "label": "Properties", "type": "collection", "spec": [
+                      { "label": "url", "name": "url", "type": "text" },
+                      { "label": "type", "name": "type", "type": "text" }
+                  ]},
+                  { "label": "Value", "name": "value", "type": "text" }
+              ]}
+          ]}
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "google-sheets:addRow",
+      "version": 2,
+      "parameters": {
+        "__IMTCONN__": "[REDACTED]"
+      },
+      "filter": {
+        "name": "Job Keyword Filter",
+        "conditions": [
+          [{ "a": "", "o": "text:contain:ci", "b": "data analyst" }],
+          [{ "a": "", "o": "text:contain:ci", "b": "data science" }],
+          [{ "a": "", "o": "text:contain:ci", "b": "machine learning" }],
+          [{ "a": "", "o": "text:contain:ci", "b": "AI" }],
+          [{ "a": "", "o": "text:contain:ci", "b": "intern" }],
+          [{ "a": "", "o": "text:contain:ci", "b": "Engineer " }]
+        ]
+      },
+      "mapper": {
+        "mode": "map",
+        "insertUnformatted": false,
+        "valueInputOption": "USER_ENTERED",
+        "insertDataOption": "INSERT_ROWS",
+        "spreadsheetId": "[REDACTED]",
+        "sheetId": "Sheet1",
+        "tableFirstRow": "A1:Z1",
+        "values": {
+          "0": "{{1.title}}",
+          "1": "{{1.rssFields.company}}",
+          "2": "{{1.rssFields.link}}",
+          "3": "{{1.rssFields.pubdate}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0 },
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "label": "My Google connection ([REDACTED])",
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}
