@@ -1,78 +1,107 @@
-Remote Job Scraper – Data Analyst / AI / ML Internships
+# 🧠 Remote Job Scraper – Data Analyst / AI / ML Internships
 
+![Build](https://img.shields.io/badge/automation-Make.com-blue)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Tech](https://img.shields.io/badge/tech-stack-yellow)
+![Jobs](https://img.shields.io/badge/job%20type-remote-informational)
+![Target](https://img.shields.io/badge/focus-AI%2FML%2FData%20Science-purple)
 
+This project automates the process of collecting **remote job listings** related to **Data Analyst**, **Data Science**, **Artificial Intelligence (AI)**, **Machine Learning (ML)**, and **Internships** using [Make.com](https://www.make.com/) and **Google Sheets**.
 
+---
 
-This project automates the process of collecting remote job listings related to Data Analyst, Data Science, AI, Machine Learning, and Internships using Make.com and Google Sheets.
+## 🚀 What It Does
 
-🚀 What It Does
-Fetches job posts from We Work Remotely – Data Jobs
+- Fetches job posts from *We Work Remotely – Data Jobs*.
+- Filters job titles using relevant keywords:
+  - `data analyst`, `data science`, `AI`, `machine learning`, `intern`
+- Saves matching job posts to a **Google Sheet**, including:
+  - **Job Title**
+  - **Company Name**
+  - **Job Link**
+  - **Publication Date**
 
-Filters job titles with keywords: data analyst, data science, AI, machine learning, intern
+---
 
-Saves relevant jobs into a Google Sheet with:
+## 🔧 How It Works
 
-Job Title
+### 🔄 Scenario Built on Make.com
 
-Company Name
+1. Uses the **RSS Feed** module to fetch job listings.
+2. Filters the posts using keyword-based conditions.
+3. Appends valid results to your **Google Sheet**.
 
-Job Link
+---
 
-Publication Date
+## 📊 Google Sheets Output
 
-🔧 How It Works
-Scenario Built on Make.com
+Before running, create a Google Sheet with the following columns:
 
-Uses the RSS feed module to fetch job posts.
+| Job Title | Company | Link | Date |
+|-----------|---------|------|------|
 
-Filters posts using keyword-based conditions.
+Paste your **Google Sheet ID** into the Make scenario JSON before uploading.
 
-Appends valid results to Google Sheets.
+---
 
-Google Sheets Output
+## 🛠 Tech Stack
 
-You need to create a sheet with columns: Job Title, Company, Link, Date
+| Tool        | Purpose                                     |
+|-------------|---------------------------------------------|
+| Make.com    | Automates the workflow (RSS ➜ Filter ➜ Sheet) |
+| RSS Feed    | Provides live job listings                  |
+| Google Sheets | Stores the filtered job results          |
+| JSON        | Format for importing the automation scenario |
 
-Paste your Google Sheet ID inside the scenario JSON before uploading.
+---
 
-🛠 Tech Stack
-Tool	Purpose
-Make.com	Automates the workflow (RSS ➜ Filter ➜ Google Sheets)
-RSS Feed	Source for live job listings
-Google Sheets	Stores the filtered job results
-JSON	Format for importing the automation scenario
+## 📂 Files
 
-📂 Files
-remote-job-scraper-scenario.json — The Make scenario file (import into your Make dashboard)
+- `remote-job-scraper-scenario.json` — Make.com automation scenario (import into your Make dashboard)
+- `README.md` — Project documentation
 
-README.md — Project documentation
+---
 
-✅ Prerequisites
-A Make.com account
+## ✅ Prerequisites
 
-A Google Sheet (shared with make.com@apps.integromat.com)
+- A **Make.com** account
+- A **Google Sheet** shared with:  
+  `make.com@apps.integromat.com`
+- Activated Make.com connections for:
+  - **Google Sheets**
+  - **RSS Feed module**
 
-Activated Make.com connections for:
+---
 
-Google Sheets
+## 🕒 Scheduling (Optional)
 
-RSS module
+You can set the scenario to run automatically every few hours to keep your job listings up to date.
 
-🔄 Scheduling (Optional)
-You can schedule this scenario to run automatically every few hours to keep your sheet updated with new jobs.
+---
 
-🔐 Security Note
-This scenario only reads from a public RSS feed and writes to your private Google Sheet. No credentials are stored in the shared JSON file.
+## 🔐 Security Note
 
-📌 Use Case
-Ideal for:
+This scenario only:
+- Reads from a public RSS feed
+- Writes to a private Google Sheet
 
-Students and job seekers in AI/ML/Data fields
+**No login credentials or sensitive data** are stored or exposed in the shared JSON file.
 
-Automating internship hunting
+---
 
-Building a personal job board or tracker
+## 📌 Use Cases
 
-💡 Tip
-You can customize the filters in the scenario to match your specific interests or target job titles.
+Perfect for:
 
+- Students and job seekers in **AI**, **ML**, **Data Analytics**, or **Data Science**
+- Automating internship and remote job hunting
+- Creating your personal job board or tracker
+
+---
+
+## 💡 Customization Tip
+
+You can easily **edit the filters** inside Make.com to:
+- Target specific roles
+- Focus on keywords or companies you're interested in
